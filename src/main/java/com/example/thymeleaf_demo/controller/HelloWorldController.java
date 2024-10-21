@@ -3,24 +3,21 @@ package com.example.thymeleaf_demo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloWorldController {
-    @RequestMapping("/showForm")
+    @GetMapping("/showForm")
     public String showForm() {
         return "hello-world-form";
     }
 
-    @RequestMapping("/processForm")
+    @GetMapping("/processForm")
     public String processForm() {
         return "hello-world";
     }
 
-    @RequestMapping("/processFormVersionTwo")
+    @PostMapping("/processFormVersionTwo")
     public String processFormVersionTwo(HttpServletRequest request, Model model) {
         // Read the request parameter from the HTML form
         String theName = request.getParameter("studentName");
@@ -37,7 +34,7 @@ public class HelloWorldController {
         return "hello-world-version-two";
     }
 
-    @RequestMapping("/processFormVersionThree")
+    @PostMapping("/processFormVersionThree")
     public String processFormVersionThree(@RequestParam("studentName") String theName, Model model) {
         // Create the message
         String result = "Hey my friend from V3! " + theName;
