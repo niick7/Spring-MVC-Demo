@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
@@ -20,7 +21,7 @@ public class HelloWorldController {
     }
 
     @RequestMapping("/processFormVersionTwo")
-    public String letsShoutDude(HttpServletRequest request, Model model) {
+    public String processFormVersionTwo(HttpServletRequest request, Model model) {
         // Read the request parameter from the HTML form
         String theName = request.getParameter("studentName");
 
@@ -34,5 +35,16 @@ public class HelloWorldController {
         model.addAttribute("message", result);
 
         return "hello-world-version-two";
+    }
+
+    @RequestMapping("/processFormVersionThree")
+    public String processFormVersionThree(@RequestParam("studentName") String theName, Model model) {
+        // Create the message
+        String result = "Hey my friend from V3! " + theName;
+
+        // Add message to the model
+        model.addAttribute("message", result);
+
+        return "hello-world-version-three";
     }
 }
